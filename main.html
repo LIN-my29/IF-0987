@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>四方风名</title>
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box;font-family:"微软雅黑";}
+        body{
+            background: url("tree1.jpg") no-repeat center top;
+            background-size: cover;
+            min-height: 100vh;
+            position: relative;
+        }
+        /* 返回按钮 */
+        .back-btn{
+            position:fixed;
+            right:30px;bottom:30px;
+            width:60px;height:60px;
+            background:#8cc269;
+            color:white;
+            border-radius:50%;
+            display:flex;align-items:center;justify-content:center;
+            text-decoration:none;
+            font-size: 18px;
+            z-index: 100;
+        }
+        /* 透明圆形热区 + 悬浮发光 */
+        .jump-area{
+            position: absolute;
+            z-index: 10;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+        .jump-area:hover {
+            box-shadow: 0 0 30px 12px rgba(140, 194, 105, 0.7);
+        }
+
+        /* 悬浮提示文字样式 */
+        .jump-area::before {
+            content: "";
+            position: absolute;
+            top: -50px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(140, 194, 105, 0.9);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 10px;
+            font-size: 16px;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        .jump-area:hover::before {
+            opacity: 1;
+        }
+
+        /* 分别设置悬浮文字 */
+        .man::before { content: "四方风神"; }
+        .tree-hole::before { content: "小文"; }
+        .girl::before { content: "视频"; }
+        .tortoise::before { content: "甲骨"; }
+
+        /* 左侧男人 - 四方风神 */
+        .man{
+            width: 200px;
+            height: 500px;
+            left: 10%;
+            top: 40%;
+        }
+        /* 树洞 - 小文 */
+        .tree-hole{
+            width: 180px;
+            height: 300px;
+            left: 30%;
+            top: 55%;
+        }
+        /* 白衣小女孩 - 视频 */
+        .girl{
+            width: 180px;
+            height: 450px;
+            left: 45%;
+            top: 45%;
+        }
+        /* 乌龟 - 甲骨 */
+        .tortoise{
+            width: 220px;
+            height: 300px;
+            right: 10%;
+            top: 65%;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 所有热区（位置、跳转、顺序完全不变） -->
+    <a href="home.html" class="jump-area man"></a>
+    <a href="message.html" class="jump-area tree-hole"></a>
+    <a href="blank.html" class="jump-area girl"></a>
+    <a href="detail.html" class="jump-area tortoise"></a>
+
+    <!-- 返回按钮 -->
+    <a href="index.html" class="back-btn">返回</a>
+</body>
+</html>

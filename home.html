@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>四方风神</title>
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box;font-family:"微软雅黑";}
+        body{background:#f5f9f0;}
+        .banner{
+            background: #f5f9f0;
+            color:#2d5a1a;
+            padding:60px 20px;text-align:center;
+        }
+        .banner h2{font-size:36px;margin-bottom:20px;}
+        .banner p{font-size:18px;line-height:1.8;max-width:1000px;margin:0 auto;}
+        .icon-box{
+            max-width:1200px;margin:60px auto;display:flex;justify-content:space-around;
+        }
+        /* 四个白色按钮放大至原来的130% */
+        .icon-item{
+            width:140px;height:140px;
+            background:rgba(255,255,255,0.7);
+            border-radius:20px;
+            display:flex;align-items:center;justify-content:center;
+            font-size:22px;color:#8cc269;text-decoration:none;
+            box-shadow:0 5px 15px rgba(0,0,0,0.1);transition:0.3s;
+        }
+        .icon-item:hover{transform:scale(1.1);background:#8cc269;color:white;}
+        .container{max-width:1200px;margin:0 auto;padding:20px;}
+        .section{
+            background:white;border-radius:18px;padding:40px;margin:30px 0;
+            box-shadow:0 5px 15px rgba(0,0,0,0.05);
+        }
+        .section h2{
+            color:#4c7737;font-size:32px;text-align:center;margin-bottom:30px;
+        }
+        .section p{color:#555;font-size:16px;line-height:1.8;text-align:center;}
+        .text-box {
+            background: rgba(140, 194, 105, 0.1);
+            padding:30px;
+            border-radius:15px;
+            margin:20px auto;
+            max-width:800px;
+            text-align:center;
+            line-height:2;
+            font-size:17px;
+            font-weight:bold;
+            color:#2d5a1a;
+        }
+        /* 图片统一样式 */
+        .feng-img {
+            display: block;
+            max-width: 80%;
+            height: auto;
+            margin: 20px auto 0;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .nav{
+            width:180px;position:fixed;left:20px;top:10vh;
+            background:#8cc269;border-radius:15px;padding:15px 0;
+            text-align:center;z-index:99;
+        }
+        .nav a{
+            display:block;padding:15px;margin:10px 15px;color:white;
+            text-decoration:none;font-size:20px;border-radius:10px;
+            transition:0.3s;
+        }
+        .nav a:hover,.nav a.active{background:white;color:#8cc269;font-weight:bold;}
+        .back-top{
+            position:fixed;right:30px;bottom:30px;
+            width:60px;height:60px;background:#8cc269;color:white;
+            border-radius:50%;display:flex;align-items:center;justify-content:center;
+            text-decoration:none;
+        }
+    </style>
+</head>
+<body>
+    <div class="nav">
+        <!-- 修改：视频链接改为main.html -->
+        <a href="blank.html">视频</a>
+        <a href="home.html" class="active">四方风神</a>
+        <a href="detail.html">甲骨</a>
+        <a href="message.html">小文</a>
+    </div>
+
+    <div class="banner">
+        <h2>四方风神</h2>
+        <p>带你了解甲骨文记载的四方风神文化</p>
+    </div>
+
+    <div class="icon-box">
+        <a href="#music" class="icon-item">风神析</a>
+        <a href="#reading" class="icon-item">风神因</a>
+        <a href="#sport" class="icon-item">风神𣐺</a>
+        <a href="#photo" class="icon-item">风神夗</a>
+    </div>
+
+    <div class="container">
+        <div id="music" class="section">
+            <h2>风神析</h2>
+            <div class="text-box">
+                析的本义为分开、劈开，对应春季的草木破土萌发。处于东方的析神召唤出的协风寓意协同万物生长、催生万物生机。
+            </div>
+            <!-- 风神析下方图片：feng1 -->
+            <img src="feng1.jpg" class="feng-img" alt="风神析">
+        </div>
+
+        <div id="reading" class="section">
+            <h2>风神因</h2>
+            <div class="text-box">
+                因的本义为依靠、安居，对应夏季万物盛长的状态。处于南方的因神召唤出的飘风代表着湿意温润的南风，滋润作物生长。
+            </div>
+            <!-- 风神因下方图片：feng2 -->
+            <img src="feng2.jpg" class="feng-img" alt="风神因">
+        </div>
+
+        <div id="sport" class="section">
+            <h2>风神𣐺</h2>
+            <div class="text-box">
+                𣐺的本义为平定、收敛，对应秋季万物成熟收敛的物候特征。处于西方的神召唤出彝风，宣告进入作物收割、万物收藏的阶段。
+            </div>
+            <!-- 风神𣐺下方图片：feng3 -->
+            <img src="feng3.jpg" class="feng-img" alt="风神𣐺">
+        </div>
+
+        <div id="photo" class="section">
+            <h2>风神夗</h2>
+            <div class="text-box">
+                本义为蛰伏、闭合，对应冬季万物闭藏的状态。处于北方的夗神召唤出的冽风对应着寒冷刺骨的北风和冬季最明显的气候特征。
+            </div>
+            <!-- 风神夗下方图片：feng4 -->
+            <img src="feng4.jpg" class="feng-img" alt="风神夗">
+        </div>
+    </div>
+    <!-- 修改：返回顶部改为链接到main.html -->
+    <a href="main.html" class="back-top">返回</a>
+</body>
+</html>

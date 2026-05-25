@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>小文</title>
+    <style>
+        /* 原有样式保留 */
+        *{margin:0;padding:0;box-sizing:border-box;font-family:"微软雅黑";}
+        body{background:#f5f9f0;}
+        .container{max-width:1200px;margin:0 auto;padding:20px;}
+        .section{
+            background:white;border-radius:18px;padding:40px;margin:30px 0;
+            box-shadow:0 5px 15px rgba(0,0,0,0.05);
+        }
+        .section h2{
+            color:#4c7737;font-size:32px;text-align:center;margin-bottom:30px;
+        }
+        .nav{
+            width:180px;position:fixed;left:20px;top:10vh;
+            background:#8cc269;border-radius:15px;padding:15px 0;
+            text-align:center;z-index:99;
+        }
+        .nav a{
+            display:block;padding:15px;margin:10px 15px;color:white;
+            text-decoration:none;font-size:20px;border-radius:10px;
+            transition:0.3s;
+        }
+        .nav a:hover,.nav a.active{background:white;color:#8cc269;font-weight:bold;}
+        .back-top{
+            position:fixed;right:30px;bottom:30px;
+            width:60px;height:60px;background:#8cc269;color:white;
+            border-radius:50%;display:flex;align-items:center;justify-content:center;
+            text-decoration:none;
+        }
+        .xiaowen-img {
+            width: 180px;
+            height: auto;
+            border-radius: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-right: 50px;
+        }
+        .qa-wrapper {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+        }
+
+        /* 新增AI对话样式 */
+        .chat-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            background-color: white;
+            height: 600px; /* 适配原页面高度 */
+        }
+
+        .messages {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            background: #f9fff3;
+            border-radius: 12px;
+            border: 1px solid #e0e9d8;
+        }
+
+        .message {
+            max-width: 70%;
+            padding: 12px 16px;
+            border-radius: 8px;
+            word-wrap: break-word;
+            line-height: 1.5;
+        }
+
+        .user-message {
+            background-color: #24be58;
+            color: white;
+            align-self: flex-end;
+            margin-left: auto;
+        }
+
+        .ai-message {
+            background-color: #f0f0f0;
+            color: #333;
+            align-self: flex-start;
+            white-space: pre-wrap;
+        }
+
+        .input-container {
+            padding: 20px;
+            border-top: 1px solid #e0e0e0;
+            background-color: white;
+            border-radius: 0 0 12px 12px;
+        }
+
+        .input-wrapper {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .message-input {
+            flex: 1;
+            padding: 12px 16px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            outline: none;
+        }
+
+        .message-input:focus {
+            border-color: #24be58;
+        }
+
+        .send-button {
+            padding: 12px 24px;
+            background-color: #24be58;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .send-button:hover {
+            background-color: #1ea049;
+        }
+
+        .send-button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+        .loading {
+            display: none;
+            align-items: center;
+            gap: 8px;
+            color: #666;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+
+        .loading.show {
+            display: flex;
+        }
+
+        .loading-dots {
+            display: inline-block;
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background-color: #24be58;
+            animation: loading 1.4s infinite ease-in-out both;
+        }
+
+        .loading-dots:nth-child(1) {
+            animation-delay: -0.32s;
+        }
+
+        .loading-dots:nth-child(2) {
+            animation-delay: -0.16s;
+        }
+
+        @keyframes loading {
+            0%, 80%, 100% {
+                transform: scale(0);
+            }
+            40% {
+                transform: scale(1);
+            }
+        }
+
+        .welcome-message {
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div class="nav">
+        <a href="blank.html">视频</a>
+        <a href="home.html">四方风神</a>
+        <a href="detail.html">甲骨</a>
+        <a href="message.html" class="active">小文</a>
+    </div>
+
+    <div class="container">
+        <div class="section">
+            <h2>小文</h2>
+            <div class="qa-wrapper">
+                <img src="xiaowen.jpg" class="xiaowen-img" alt="小文">
+                
+                <!-- 替换为AI对话助手代码 -->
+                <div class="chat-container">
+                    <div class="messages" id="messages">
+                        <div class="welcome-message">
+                            您好！我是小文，我可以为你解答甲骨文、四方风名相关问题哦
+                        </div>
+                    </div>
+
+                    <div class="input-container">
+                        <div class="input-wrapper">
+                            <input
+                                type="text"
+                                class="message-input"
+                                id="messageInput"
+                                placeholder="请输入您的问题..."
+                                maxlength="1000"
+                            >
+                            <button class="send-button" id="sendButton">
+                                发送
+                            </button>
+                        </div>
+                        <div class="loading" id="loading">
+                            <span>AI正在思考</span>
+                            <div class="loading-dots"></div>
+                            <div class="loading-dots"></div>
+                            <div class="loading-dots"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <a href="main.html" class="back-top">返回</a>
+
+    <script>
+        // DeepSeek API配置
+        const DEEPSEEK_API_URL = 'https://api.deepseek.com/v1/chat/completions';
+        const DEEPSEEK_API_KEY = 'sk-478397c04e074508958eae8027460298'; // 请替换为实际API Key
+
+        const messagesContainer = document.getElementById('messages');
+        const messageInput = document.getElementById('messageInput');
+        const sendButton = document.getElementById('sendButton');
+        const loading = document.getElementById('loading');
+
+        // 添加消息到聊天界面
+        function addMessage(content, isUser = false) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${isUser ? 'user-message' : 'ai-message'}`;
+            
+            // 流式输出专用：先创建空的AI消息框
+            if (!isUser) {
+                messageDiv.textContent = '';
+            } else {
+                messageDiv.textContent = content;
+            }
+
+            // 移除欢迎消息
+            const welcomeMessage = messagesContainer.querySelector('.welcome-message');
+            if (welcomeMessage) welcomeMessage.remove();
+
+            messagesContainer.appendChild(messageDiv);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+            return messageDiv;
+        }
+
+        // 显示/隐藏加载状态
+        function showLoading(show = true) {
+            loading.classList.toggle('show', show);
+            sendButton.disabled = show;
+            sendButton.textContent = show ? '发送中...' : '发送';
+        }
+
+        // 流式调用DeepSeek API
+        async function streamChat(userMessage) {
+            const aiMessageDiv = addMessage('', false);
+            let fullText = '';
+
+            try {
+                const response = await fetch(DEEPSEEK_API_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${DEEPSEEK_API_KEY}`
+                    },
+                    body: JSON.stringify({
+                        model: 'deepseek-chat',
+                        messages: [{ role: 'user', content: userMessage }],
+                        stream: true, // 开启流式输出
+                        temperature: 0.7,
+                        max_tokens: 2000
+                    })
+                });
+
+                if (!response.ok) throw new Error(`请求失败：${response.status}`);
+
+                const reader = response.body.getReader();
+                const decoder = new TextDecoder();
+
+                while (true) {
+                    const { done, value } = await reader.read();
+                    if (done) break;
+
+                    const chunk = decoder.decode(value, { stream: true });
+                    const lines = chunk.split('\n').filter(line => line.trim() !== '');
+
+                    for (const line of lines) {
+                        if (line.startsWith('data: ')) {
+                            const data = line.replace('data: ', '');
+                            if (data === '[DONE]') continue;
+
+                            try {
+                                const json = JSON.parse(data);
+                                const content = json.choices[0]?.delta?.content || '';
+                                if (content) {
+                                    fullText += content;
+                                    aiMessageDiv.textContent = fullText;
+                                    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+                                }
+                            } catch (e) {}
+                        }
+                    }
+                }
+            } catch (error) {
+                aiMessageDiv.textContent = '抱歉，服务异常，请稍后重试';
+                console.error('流式请求错误：', error);
+            } finally {
+                showLoading(false);
+            }
+        }
+
+        // 发送消息
+        async function sendMessage() {
+            const message = messageInput.value.trim();
+            if (!message) return;
+
+            addMessage(message, true);
+            messageInput.value = '';
+            showLoading(true);
+            streamChat(message);
+        }
+
+        // 事件监听
+        sendButton.addEventListener('click', sendMessage);
+        messageInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                sendMessage();
+            }
+        });
+
+        messageInput.focus();
+    </script>
+</body>
+</html>

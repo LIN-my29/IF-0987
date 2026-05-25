@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>空白页</title>
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box;font-family:"微软雅黑";}
+        body{
+            background: #f5f9f0;
+            height: 100vh;
+        }
+
+        /* 完全统一的左侧侧边栏样式（和其他页面一致） */
+        .nav{
+            width:180px;position:fixed;left:20px;top:10vh;
+            background:#8cc269;border-radius:15px;padding:15px 0;
+            text-align:center;z-index:99;
+        }
+        .nav a{
+            display:block;padding:15px;margin:10px 15px;color:white;
+            text-decoration:none;font-size:20px;border-radius:10px;
+            transition:0.3s;
+        }
+        .nav a:hover,.nav a.active{background:white;color:#8cc269;font-weight:bold;}
+
+        /* 返回按钮：链接回main页面 */
+        .back-btn{
+            position:fixed;
+            right:30px;
+            bottom:30px;
+            width:60px;
+            height:60px;
+            background:#8cc269;
+            color:white;
+            border-radius:50%;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            text-decoration:none;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 统一左侧侧边栏 -->
+    <div class="nav">
+        <a href="index.html">视频</a>
+        <a href="home.html">四方风神</a>
+        <a href="detail.html">甲骨</a>
+        <a href="message.html">小文</a>
+    </div>
+
+    <!-- 空白页面主体 -->
+    
+    <!-- 返回按钮 -->
+    <a href="main.html" class="back-btn">返回</a>
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>甲骨</title>
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box; font-family:"微软雅黑";}
+        body{background:#f5f9f0;}
+        .container{max-width:1200px;margin:0 auto;padding:20px;}
+        .section{
+            background:white;border-radius:18px;padding:40px;margin:30px 0;
+            box-shadow:0 5px 15px rgba(0,0,0,0.05);
+        }
+        .section h2{
+            color:#4c7737;font-size:32px;text-align:center;margin-bottom:30px;
+        }
+        .nav{
+            width:180px;position:fixed;left:20px;top:10vh;
+            background:#8cc269;border-radius:15px;padding:15px 0;
+            text-align:center;z-index:99;
+        }
+        .nav a{
+            display:block;padding:15px;margin:10px 15px;color:white;
+            text-decoration:none;font-size:20px;border-radius:10px;
+            transition:0.3s;
+        }
+        .nav a:hover,.nav a.active{background:white;color:#8cc269;font-weight:bold;}
+        .back-top{
+            position:fixed;right:30px;bottom:30px;
+            width:60px;height:60px;background:#8cc269;color:white;
+            border-radius:50%;display:flex;align-items:center;justify-content:center;
+            text-decoration:none;
+        }
+
+        /* 排版布局：左右对齐 */
+        .detail-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0;
+            margin-bottom: 30px;
+            max-width: 90%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .detail-text {
+            flex: none;
+            width: 48%;
+            font-size: 17px;
+            line-height: 2;
+            color: #333;
+            text-align: justify;
+        }
+        .detail-img {
+            flex: none;
+            width: 48%;
+            max-width: 48%;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .detail-img-full {
+            display: block;
+            max-width: 90%;
+            width: 90%;
+            height: auto;
+            margin: 0 auto;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="nav">
+        <a href="blank.html">视频</a>
+        <a href="home.html">四方风神</a>
+        <a href="detail.html" class="active">甲骨</a>
+        <a href="message.html">小文</a>
+    </div>
+
+    <div class="container">
+        <div class="section">
+            <h2>甲骨</h2>
+            
+            <!-- 上部分：文字 + 小图 -->
+            <div class="detail-row">
+                <div class="detail-text">
+                    这版“四方风名”刻辞很可能是神谱或祀谱，它记载了东、南、西、北四方的神名与四方的风名。商人以为四方东、西、南、北皆有神灵，四方的神灵可以操纵风、雨、云，进而影响农业生产。甲骨文中的“四方”与“四风”之名可与《尚书》与《山海经》中的内容相印证。
+                </div>
+                <img src="jiagu1.jpg" class="detail-img" alt="甲骨四方风名">
+            </div>
+
+            <!-- 下部分：全屏大图（与上方左右严格对齐） -->
+            <img src="jiagu2.jpg" class="detail-img-full" alt="甲骨实物">
+
+        </div>
+    </div>
+
+    <a href="main.html" class="back-top">返回</a>
+</body>
+</html>
