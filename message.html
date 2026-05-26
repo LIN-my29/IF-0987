@@ -179,6 +179,15 @@
             font-size: 14px;
             margin-top: 50px;
         }
+        /* 新增标题下方图片样式（可选，保持和原图片一致的样式） */
+        .title-img {
+            display: block;
+            width: 180px;
+            height: auto;
+            border-radius: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin: 0 auto 30px; /* 居中并添加底部间距 */
+        }
     </style>
 </head>
 <body>
@@ -192,9 +201,10 @@
     <div class="container">
         <div class="section">
             <h2>小文</h2>
+            <!-- 新增标题下方的img1图片 -->
+            <img src="img1.jpg" class="title-img" alt="标题图片">
             <div class="qa-wrapper">
-                <!-- 唯一修改：图片名称改为 img1.jpg -->
-                <img src="img1.jpg" class="xiaowen-img" alt="小文">
+                <!-- 已删除原有的小文图片 -->
                 
                 <!-- 替换为AI对话助手代码 -->
                 <div class="chat-container">
