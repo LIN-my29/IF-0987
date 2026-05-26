@@ -231,9 +231,8 @@
     <a href="main.html" class="back-top">返回</a>
 
     <script>
-        // DeepSeek API配置
-        const DEEPSEEK_API_URL = 'https://api.deepseek.com/v1/chat/completions';
-        const DEEPSEEK_API_KEY = 'sk-478397c04e074508958eae8027460298'; // 请替换为实际API Key
+        // 改为调用后端中转接口
+        const API_URL = 'http://localhost:3000/chat';
 
         const messagesContainer = document.getElementById('messages');
         const messageInput = document.getElementById('messageInput');
@@ -268,17 +267,16 @@
             sendButton.textContent = show ? '发送中...' : '发送';
         }
 
-        // 流式调用DeepSeek API
+        // 流式调用后端接口
         async function streamChat(userMessage) {
             const aiMessageDiv = addMessage('', false);
             let fullText = '';
 
             try {
-                const response = await fetch(DEEPSEEK_API_URL, {
+                const response = await fetch(API_URL, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${DEEPSEEK_API_KEY}`
                     },
                     body: JSON.stringify({
                         model: 'deepseek-chat',
@@ -289,7 +287,7 @@
                     })
                 });
 
-                if (!response.ok) throw new Error(`请求失败：${response.status}`);
+                if (!response.ok) throw new Error(`服务响应失败：${response.status}`);
 
                 const reader = response.body.getReader();
                 const decoder = new TextDecoder();
@@ -314,12 +312,20 @@
                                     aiMessageDiv.textContent = fullText;
                                     messagesContainer.scrollTop = messagesContainer.scrollHeight;
                                 }
-                            } catch (e) {}
+                            } catch (e) {
+                                console.warn('解析流式数据失败:', e);
+                            }
                         }
                     }
                 }
+
+                // 如果AI无响应
+                if (fullText === '') {
+                    aiMessageDiv.textContent = '抱歉，未获取到有效回复，请换个问题试试';
+                }
+
             } catch (error) {
-                aiMessageDiv.textContent = '抱歉，服务异常，请稍后重试';
+                aiMessageDiv.textContent = `抱歉，服务异常：${error.message}，请稍后重试`;
                 console.error('流式请求错误：', error);
             } finally {
                 showLoading(false);
