@@ -1,64 +1,55 @@
 const express = require('express');
-const cors = require('cors'); // 解决跨域问题
+const cors = require('cors');
+const fetch = require('node-fetch');
 const app = express();
 
-// 中间件配置
+// 中间件：解析JSON + 允许跨域（适配GitHub Pages）
 app.use(express.json());
-app.use(cors()); // 允许所有跨域请求（生产环境可限定域名）
+app.use(cors());
 
-// 替换为你的DeepSeek API Key
-const DEEPSEEK_API_KEY = 'sk-478397c04e074508958eae8027460298';
+// 从环境变量读取API Key（安全不泄露）
+const DEEPSEEK_API_KEY = process.env.DEEPSEEK_API_KEY;
 const DEEPSEEK_API_URL = 'https://api.deepseek.com/v1/chat/completions';
 
-// 中转接口（支持流式响应）
+// AI聊天接口（流式响应）
 app.post('/chat', async (req, res) => {
   try {
-    // 转发请求到DeepSeek API
+    // 请求DeepSeek官方接口
     const response = await fetch(DEEPSEEK_API_URL, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${DEEPSEEK_API_KEY}`,
+        'Authorization': `Bearer ${DEEPSEEK_API_KEY}`
       },
-      body: JSON.stringify(req.body),
+      body: JSON.stringify(req.body)
     });
 
     if (!response.ok) {
-      throw new Error(`DeepSeek API 响应失败: ${response.status}`);
+      return res.status(response.status).json({ error: "AI接口调用失败" });
     }
 
-    // 处理流式响应（核心）
+    // 设置流式响应头
     res.setHeader('Content-Type', 'text/event-stream');
     res.setHeader('Cache-Control', 'no-cache');
     res.setHeader('Connection', 'keep-alive');
 
+    // 转发流式数据
     const reader = response.body.getReader();
     const decoder = new TextDecoder();
-
-    // 流式转发数据到前端
     while (true) {
       const { done, value } = await reader.read();
       if (done) break;
-      const chunk = decoder.decode(value, { stream: true });
-      res.write(chunk);
-      await new Promise(resolve => setImmediate(resolve)); // 防止数据积压
+      res.write(decoder.decode(value));
     }
-
     res.end();
+
   } catch (error) {
-    console.error('代理请求错误:', error);
-    res.status(500).json({ 
-      error: '服务异常', 
-      message: error.message 
-    });
+    res.status(500).json({ error: "服务异常", msg: error.message });
   }
 });
 
-// 静态文件托管（可选：方便前端直接访问）
-app.use(express.static('.'));
-
-// 启动服务
-const PORT = 3000;
+// 适配Cyclic端口（核心！不能写死3000）
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(`中转服务已启动，地址：http://localhost:${PORT}`);
+  console.log(`服务启动成功：端口 ${PORT}`);
 });
