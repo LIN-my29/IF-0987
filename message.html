@@ -32,7 +32,7 @@
             text-decoration:none;
         }
 
-        /* 小文视频/图片样式（完全保留原尺寸样式） */
+        /* 小文视频样式（和原来的图片样式完全一致） */
         .xiaowen-img {
             width: 180px;
             height: auto;
@@ -124,9 +124,9 @@
         <div class="section">
             <h2>小文</h2>
             <div class="qa-wrapper">
-                <!-- 🔥 核心修改1：图片替换为自动循环视频 -->
+                <!-- 🔥 已替换为你的永久视频链接，自动循环播放 -->
                 <video class="xiaowen-img" autoplay loop muted playsinline>
-                    <source src="xiaowen.mp4" type="video/mp4">
+                    <source src="https://user-images.githubusercontent.com/287655829/598819206-6abe7909-2106-4398-b74a-f54df6bfa650.mp4" type="video/mp4">
                     您的浏览器不支持视频播放
                 </video>
                 
@@ -169,7 +169,7 @@
             "北方风神是谁": "北方风神名夗，对应冬季，掌管寒风，寓意万物闭藏、休养生息。"
         };
 
-        // 🔥 核心修改2：中文女声语音播报（标准女孩声音）
+        // 中文女声语音播报（标准女孩声音，完全不变）
         function speakText(text) {
             const cleanText = text.replace(/[😊~]/g, '');
             window.speechSynthesis.cancel();
