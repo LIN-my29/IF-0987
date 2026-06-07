@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <title>空白页</title>
+    <title>四方风归 - 视频页</title>
     <style>
         *{margin:0;padding:0;box-sizing:border-box;font-family:"微软雅黑";}
         body{
@@ -39,19 +39,42 @@
             text-decoration:none;
             font-size: 18px;
         }
+
+        /* 视频容器样式：居中显示，适配页面 */
+        .video-container{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%;
+            max-width: 1000px;
+            padding-left: 180px; /* 给左侧侧边栏留出空间 */
+        }
+
+        /* B站iframe播放器样式：自适应宽度，保持16:9比例 */
+        iframe{
+            width: 100%;
+            height: 560px; /* 16:9比例适配，宽度1000px时高度562.5px，取560px更适配 */
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
     </style>
 </head>
 <body>
     <!-- 统一左侧侧边栏 -->
     <div class="nav">
-        <a href="index.html">视频</a>
+        <a href="index.html" class="active">视频</a> <!-- 标记当前激活的视频页 -->
         <a href="home.html">四方风神</a>
         <a href="detail.html">甲骨</a>
         <a href="message.html">小文</a>
     </div>
 
-    <!-- 空白页面主体 -->
-    
+    <!-- 视频展示主体（替换为B站iframe） -->
+    <div class="video-container">
+        <iframe src="//player.bilibili.com/player.html?isOutside=true&aid=116706928298010&bvid=BV1fTEs6JEq2&cid=38925241943&p=1" 
+                scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
+    </div>
+
     <!-- 返回按钮 -->
     <a href="main.html" class="back-btn">返回</a>
 </body>
