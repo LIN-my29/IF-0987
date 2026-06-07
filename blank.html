@@ -40,7 +40,7 @@
             font-size: 18px;
         }
 
-        /* 视频容器样式：居中显示，适配页面 */
+        /* 视频容器：修改为标准16:9自适应比例，居中显示 */
         .video-container{
             position: absolute;
             top: 50%;
@@ -48,28 +48,36 @@
             transform: translate(-50%, -50%);
             width: 80%;
             max-width: 1000px;
-            padding-left: 180px; /* 给左侧侧边栏留出空间 */
+            padding-left: 180px;
+            /* 16:9 核心样式 */
+            position: relative;
+            width: 100%;
+            padding-top: 56.25%;
         }
 
-        /* B站iframe播放器样式：自适应宽度，保持16:9比例 */
+        /* B站iframe：填满16:9容器，无变形 */
         iframe{
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
-            height: 560px; /* 16:9比例适配，宽度1000px时高度562.5px，取560px更适配 */
+            height: 100%;
             border-radius: 15px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            border: none;
         }
     </style>
 </head>
 <body>
     <!-- 统一左侧侧边栏 -->
     <div class="nav">
-        <a href="index.html" class="active">视频</a> <!-- 标记当前激活的视频页 -->
+        <a href="blank.html" class="active">视频</a>
         <a href="home.html">四方风神</a>
         <a href="detail.html">甲骨</a>
         <a href="message.html">小文</a>
     </div>
 
-    <!-- 视频展示主体（替换为B站iframe） -->
+    <!-- 16:9比例视频容器 -->
     <div class="video-container">
         <iframe src="//player.bilibili.com/player.html?isOutside=true&aid=116706928298010&bvid=BV1fTEs6JEq2&cid=38925241943&p=1" 
                 scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
